@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vailae — Страница не найдена</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="gradient-bg"></div>
+
+    <div class="error-page">
+        <div class="error-content">
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Страница не найдена</h2>
+            <p class="error-text">Возможно, ссылка устарела или была удалена</p>
+            <div class="error-actions">
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-home"></i>
+                    Вернуться на главную
+                </a>
+                <a href="/dashboard" class="btn btn-outline">
+                    <i class="fas fa-user"></i>
+                    Личный кабинет
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .error-content {
+            max-width: 500px;
+        }
+        
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .error-text {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        @media (max-width: 480px) {
+            .error-actions {
+                flex-direction: column;
+            }
+            
+            .error-code {
+                font-size: 80px;
+            }
+            
+            .error-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</body>
+</html>
