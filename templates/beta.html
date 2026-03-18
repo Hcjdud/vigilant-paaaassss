@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vailae — Бета-тест</title>
+    <script src="https://telegram.org/js/telegram-webapp.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="gradient-bg"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">VAILAE</span>
+                <span class="logo-badge">BETA</span>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Главная</a></li>
+                <li><a href="/#features" class="nav-link">Возможности</a></li>
+                <li><a href="/#faq" class="nav-link">FAQ</a></li>
+                <li><a href="/dashboard" class="nav-link btn-nav">Личный кабинет</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="beta-page">
+            <div class="section-header">
+                <span class="section-badge">🚀 БЕТА-ТЕСТ</span>
+                <h1>Присоединяйся к <span class="gradient-text">закрытому тестированию</span></h1>
+                <p class="beta-page-subtitle">Первые 10,000 пользователей получат пожизненный бесплатный доступ</p>
+            </div>
+            
+            <div class="beta-page-grid">
+                <div class="beta-info-card">
+                    <h2>Что ты получишь</h2>
+                    <ul class="beta-features-list">
+                        <li><i class="fas fa-check-circle"></i> Доступ к 120+ источникам конфигов</li>
+                        <li><i class="fas fa-check-circle"></i> 3 Anti-DPI сервера для России</li>
+                        <li><i class="fas fa-check-circle"></i> 4 сервера с минимальным пингом</li>
+                        <li><i class="fas fa-check-circle"></i> Автообновление каждый час</li>
+                        <li><i class="fas fa-check-circle"></i> Поддержка Happ, v2RayTun и других</li>
+                        <li><i class="fas fa-check-circle"></i> Приоритетная поддержка в Telegram</li>
+                    </ul>
+                    
+                    <div class="beta-progress">
+                        <div class="progress-label">
+                            <span>Прогресс набора</span>
+                            <span id="betaProgress">8,547 / 10,000</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="betaProgressFill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="beta-stats-mini">
+                        <div class="stat-item">
+                            <span class="stat-value" id="betaUsers">8,547</span>
+                            <span class="stat-label">уже в бете</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="betaLeft">1,453</span>
+                            <span class="stat-label">осталось мест</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="beta-form-card">
+                    <h2>Получить доступ</h2>
+                    <p>Осталось всего <span id="betaLeftForm">1,453</span> места</p>
+                    
+                    <form id="betaForm" onsubmit="event.preventDefault(); requestBetaAccess();">
+                        <div class="form-group">
+                            <label for="email">Email (необязательно)</label>
+                            <input type="email" id="email" placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telegram">Telegram username</label>
+                            <input type="text" id="telegram" placeholder="@username">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block btn-glow">
+                            <i class="fas fa-gift"></i>
+                            Получить бета-доступ
+                        </button>
+                    </form>
+                    
+                    <p class="form-note">
+                        * После регистрации ты получишь уникальную ссылку в Telegram боте
+                    </p>
+                    
+                    <div class="beta-telegram-link">
+                        <a href="https://t.me/vailae_bot" target="_blank" class="btn btn-outline btn-block">
+                            <i class="fab fa-telegram"></i>
+                            Открыть бота
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="beta-testimonials">
+                <h2>Отзывы бета-тестеров</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">👤</div>
+                        <div class="testimonial-content">
+                            <p>"Лучший агрегатор конфигов! Пинг реально низкий, всё летает."</p>
+                            <span class="testimonial-author">— Алексей, 2 недели с Vailae</span>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">👤</div>
+                        <div class="testimonial-content">
+                            <p>"Anti-DPI работает отлично, даже при сильных блокировках."</p>
+                            <span class="testimonial-author">— Дмитрий, 1 месяц с Vailae</span>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">👤</div>
+                        <div class="testimonial-content">
+                            <p>"Очень удобно, что конфиги обновляются сами. Забыл про поиск."</p>
+                            <span class="testimonial-author">— Елена, 3 недели с Vailae</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">VAILAE</div>
+                <p class="footer-description">
+                    VPN будущего для настоящих киберпанков. Бета-тест открыт.
+                </p>
+                <div class="social-links">
+                    <a href="https://t.me/vailae" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/#features">Возможности</a></li>
+                    <li><a href="/#faq">FAQ</a></li>
+                    <li><a href="/dashboard">Личный кабинет</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Поддержка</h4>
+                <ul>
+                    <li><a href="https://t.me/vailae" target="_blank">Telegram канал</a></li>
+                    <li><a href="https://t.me/vailae_chat" target="_blank">Чат поддержки</a></li>
+                    <li><a href="mailto:support@vailae.com">support@vailae.com</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Юридическая</h4>
+                <ul>
+                    <li><a href="/privacy">Политика конфиденциальности</a></li>
+                    <li><a href="/terms">Условия использования</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <span>© 2026 Vailae. Все права защищены.</span>
+            <span>Бета-версия 1.0</span>
+        </div>
+    </footer>
+
+    <style>
+        .beta-page {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .beta-page h1 {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .beta-page-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+        
+        .beta-page-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .beta-info-card, .beta-form-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 40px;
+        }
+        
+        .beta-info-card h2, .beta-form-card h2 {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .beta-features-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .beta-features-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .beta-features-list i {
+            color: var(--success);
+            font-size: 20px;
+        }
+        
+        .beta-progress {
+            margin: 30px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+        
+        .beta-stats-mini {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 16px;
+            outline: none;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+        
+        .form-note {
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .beta-telegram-link {
+            margin-top: 20px;
+        }
+        
+        .beta-testimonials {
+            margin-top: 60px;
+        }
+        
+        .beta-testimonials h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            gap: 15px;
+            transition: var(--transition);
+        }
+        
+        .testimonial-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .testimonial-content p {
+            color: var(--text);
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        @media (max-width: 992px) {
+            .beta-page-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .beta-page h1 {
+                font-size: 36px;
+            }
+            
+            .beta-stats-mini {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/telegram-webapp.js"></script>
+    <script>
+        function requestBetaAccess() {
+            const email = document.getElementById('email').value;
+            const telegram = document.getElementById('telegram').value;
+            
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, telegram })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('✅ Заявка отправлена! Проверьте Telegram бота @vailae_bot', 'success');
+                    setTimeout(() => {
+                        window.location.href = '/#subscription';
+                    }, 2000);
+                } else {
+                    showNotification('❌ Ошибка: ' + data.error, 'error');
+                }
+            })
+            .catch(error => {
+                showNotification('❌ Ошибка сервера', 'error');
+            });
+        }
+        
+        // Обновляем статистику
+        async function updateBetaStats() {
+            try {
+                const response = await fetch('/api/stats');
+                const stats = await response.json();
+                
+                const users = stats.users || 8547;
+                const left = 10000 - users;
+                
+                document.getElementById('betaUsers').textContent = users.toLocaleString();
+                document.getElementById('betaLeft').textContent = left.toLocaleString();
+                document.getElementById('betaLeftForm').textContent = left.toLocaleString();
+                document.getElementById('betaProgress').textContent = `${users.toLocaleString()} / 10,000`;
+                
+                const progress = (users / 10000) * 100;
+                document.getElementById('betaProgressFill').style.width = `${progress}%`;
+            } catch (error) {
+                console.error('Error updating stats:', error);
+            }
+        }
+        
+        updateBetaStats();
+        setInterval(updateBetaStats, 10000);
+    </script>
+</body>
+  </html>
