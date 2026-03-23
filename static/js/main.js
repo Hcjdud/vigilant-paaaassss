@@ -1,8 +1,9 @@
-// static/js/main.js
+// static/js/main.js - Полная версия
 
 // ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
 let charts = {};
 let statsInterval;
+let particlesInitialized = false;
 
 // ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -56,8 +57,10 @@ function initNavbar() {
     });
 }
 
-// ===== ЧАСТИЦЫ =====
+// ===== ЧАСТИЦЫ НА ФОНЕ =====
 function initParticles() {
+    if (particlesInitialized) return;
+    
     const canvas = document.getElementById('canvas');
     if (!canvas) return;
     
@@ -115,13 +118,14 @@ function initParticles() {
     resize();
     createParticles();
     draw();
+    
+    particlesInitialized = true;
 }
 
 // ===== ГРАФИКИ =====
 function initCharts() {
     if (typeof Chart === 'undefined') return;
     
-    // График пользователей
     const usersCtx = document.getElementById('usersChart');
     if (usersCtx) {
         charts.users = new Chart(usersCtx, {
@@ -147,7 +151,6 @@ function initCharts() {
         });
     }
     
-    // График пинга
     const pingCtx = document.getElementById('pingChart');
     if (pingCtx) {
         charts.ping = new Chart(pingCtx, {
@@ -173,7 +176,6 @@ function initCharts() {
         });
     }
     
-    // График серверов
     const serversCtx = document.getElementById('serversChart');
     if (serversCtx) {
         charts.servers = new Chart(serversCtx, {
@@ -223,14 +225,12 @@ async function updateStats() {
             animateNumber('betaLeft', 10000 - (stats.users || 8547), 1500);
         }
         
-        // Обновляем прогресс-бар
         const progressThumb = document.querySelector('.progress-thumb');
         if (progressThumb) {
             const progress = ((stats.users || 8547) / 10000) * 100;
             progressThumb.style.width = `${progress}%`;
         }
         
-        // Обновляем графики
         if (charts.users) {
             charts.users.data.datasets[0].data = [
                 Math.floor(6500 + Math.random() * 2000),
