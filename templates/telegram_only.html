@@ -1,122 +1,53 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vailae — Доступ только через Telegram</title>
+    <title>Vailae — доступ через Telegram</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+            background:linear-gradient(135deg,#6366f1,#10b981);
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            padding:20px;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #6366f1, #10b981);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            padding: 20px;
+        .card{
+            max-width:400px;
+            background:rgba(255,255,255,0.1);
+            backdrop-filter:blur(10px);
+            border-radius:30px;
+            padding:40px;
+            text-align:center;
         }
-        
-        .container {
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        h1{font-size:48px;margin-bottom:20px;}
+        p{margin-bottom:30px;opacity:0.9;}
+        .btn{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            background:#0088cc;
+            color:white;
+            text-decoration:none;
+            padding:16px 32px;
+            border-radius:50px;
+            font-size:18px;
+            font-weight:600;
         }
-        
-        .logo {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        
-        h1 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        
-        p {
-            margin-bottom: 30px;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
-        .telegram-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #0088cc;
-            color: white;
-            text-decoration: none;
-            padding: 16px 32px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            border: none;
-            cursor: pointer;
-        }
-        
-        .telegram-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-        
-        .telegram-button i {
-            font-size: 24px;
-        }
-        
-        .bot-link {
-            margin-top: 20px;
-            color: rgba(255,255,255,0.8);
-            font-size: 14px;
-        }
-        
-        .bot-link a {
-            color: white;
-            text-decoration: underline;
-        }
-        
-        .error-details {
-            margin-top: 30px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            font-size: 12px;
-            color: rgba(255,255,255,0.7);
-        }
+        .btn:hover{transform:translateY(-2px);}
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="logo">VAILAE</div>
-        <h1>🚀 Доступ только через Telegram</h1>
-        <p>Сайт Vailae открывается исключительно через нашего Telegram бота. Это сделано для вашей безопасности и удобства.</p>
-        
-        <a href="https://t.me/{{ bot_username }}" class="telegram-button" target="_blank">
-            <i class="fab fa-telegram"></i>
+    <div class="card">
+        <h1>VAILAE</h1>
+        <p>Сайт доступен только через Telegram бота</p>
+        <a href="https://t.me/{{ bot_username }}" class="btn">
             Открыть в Telegram
         </a>
-        
-        <div class="bot-link">
-            Или напишите боту: <a href="https://t.me/{{ bot_username }}" target="_blank">@{{ bot_username }}</a>
-        </div>
-        
-        <div class="error-details">
-            <p>После открытия в Telegram, вы получите полный доступ ко всем функциям</p>
-        </div>
     </div>
 </body>
 </html>
