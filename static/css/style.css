@@ -1,4 +1,4 @@
-/* static/css/style.css */
+/* static/css/style.css - Полная версия */
 
 /* ===== ПЕРЕМЕННЫЕ ===== */
 :root {
@@ -444,6 +444,12 @@ body {
     background: transparent;
     border: 1px solid var(--primary);
     color: var(--text);
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .login-btn:hover {
@@ -1979,4 +1985,4 @@ h1 {
         min-width: auto;
         width: calc(100vw - 40px);
     }
-  }
+}
