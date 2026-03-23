@@ -1,4 +1,4 @@
-// static/js/telegram-webapp.js
+// static/js/telegram-webapp.js - Полная версия
 
 // Инициализация Telegram WebApp
 const tg = window.Telegram?.WebApp;
@@ -32,11 +32,9 @@ async function loginWithTelegram() {
             username: user.username || '',
             photo_url: user.photo_url || '',
             language_code: user.language_code || 'ru',
-            is_premium: user.is_premium || false
+            is_premium: user.is_premium || false,
+            hash: tg.initData || ''
         };
-        
-        // В реальном проекте нужно добавить hash из initData
-        // Для простоты пропускаем проверку подписи
         
         const response = await fetch('/api/auth/telegram', {
             method: 'POST',
@@ -59,7 +57,6 @@ async function loginWithTelegram() {
                 tg.enableClosingConfirmation();
             }
             
-            // Перезагружаем страницу для обновления данных
             setTimeout(() => {
                 window.location.reload();
             }, 1500);
@@ -119,7 +116,6 @@ function updateUIAfterLogin(user) {
         navUserName.textContent = user.first_name || 'User';
     }
     
-    // Обновляем информацию на странице
     const userTelegramInfo = document.getElementById('userTelegramInfo');
     const userAvatar = document.getElementById('userAvatar');
     const userName = document.getElementById('userName');
@@ -176,7 +172,7 @@ async function loadCurrentUser() {
 function updateSubscriptionUI(subscription) {
     const subInput = document.getElementById('subscriptionLink');
     if (subInput && subscription.subdomain) {
-        subInput.value = `${window.location.origin}/subscribe/${subscription.subdomain}`;
+        subInput.value = `${window.location.origin}/${subscription.subdomain}`;
     }
     
     if (subscription.expires_at) {
@@ -201,6 +197,24 @@ function updateSubscriptionUI(subscription) {
             expiryRemain.textContent = `Осталось ${daysLeft} дней бета-доступа`;
         }
     }
+    
+    // Показываем информацию об устройствах
+    const devicesList = document.getElementById('devicesList');
+    if (devicesList && subscription.devices) {
+        devicesList.innerHTML = '';
+        subscription.devices.forEach(device => {
+            const div = document.createElement('div');
+            div.className = 'device-item';
+            div.innerHTML = `
+                <div class="device-icon">📱</div>
+                <div class="device-info">
+                    <div class="device-name">${device.device_name}</div>
+                    <div class="device-time">Последний вход: ${new Date(device.last_access).toLocaleString()}</div>
+                </div>
+            `;
+            devicesList.appendChild(div);
+        });
+    }
 }
 
 // Функция для показа загрузки
@@ -209,6 +223,13 @@ function showLoading(show) {
     if (loader) {
         loader.style.display = show ? 'flex' : 'none';
     }
+}
+
+// Функция для копирования текста
+function copyText(element) {
+    const text = element.textContent || element.value;
+    navigator.clipboard.writeText(text);
+    showNotification('📋 Скопировано!', 'success');
 }
 
 // Инициализация при загрузке
@@ -224,3 +245,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     loadCurrentUser();
 });
+
+// Экспортируем функции для использования в HTML
+window.loginWithTelegram = loginWithTelegram;
+window.logout = logout;
+window.copySubscriptionLink = copySubscriptionLink;
+window.generateNewSubscription = generateNewSubscription;
+window.copyText = copyText;
