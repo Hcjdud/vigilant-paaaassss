@@ -1,29 +1,7 @@
-# requirements.txt
-# Основные зависимости для Vailae на Render.com
-
-# Flask и расширения
 Flask==2.3.3
 Flask-CORS==4.0.0
 gunicorn==21.2.0
-python-dotenv==1.0.0
-Werkzeug==2.3.7
-
-# База данных PostgreSQL
 psycopg2-binary==2.9.9
-
-# Telegram Bot API
 python-telegram-bot==20.7
-
-# HTTP запросы
 requests==2.31.0
-
-# Безопасность
-cryptography==41.0.7
-PyJWT==2.8.0
-
-# Логирование
-loguru==0.7.2
-
-# Дополнительные утилиты
-python-dateutil==2.8.2
-pytz==2023.3
+python-dotenv==1.0.0
