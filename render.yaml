@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: vailae
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: BOT_USERNAME
+        value: vailae_bot
+      - key: MAX_DEVICES
+        value: 2
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vailae-db
+          property: connectionString
+
+databases:
+  - name: vailae-db
+    plan: free
